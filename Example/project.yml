@@ -1,0 +1,49 @@
+name: AdrianExample
+options:
+  bundleIdPrefix: com.adrianhq
+  deploymentTarget:
+    iOS: "15.0"
+packages:
+  AdrianChat:
+    path: ..
+targets:
+  AdrianExample:
+    type: application
+    platform: iOS
+    sources: [AdrianExample]
+    dependencies:
+      - package: AdrianChat
+    info:
+      path: AdrianExample/Info.plist
+      properties:
+        CFBundleDisplayName: Acme
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        NSCameraUsageDescription: Take a photo to send to support.
+        NSPhotoLibraryUsageDescription: Choose a photo to send to support.
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.adrianhq.example
+        SWIFT_VERSION: "5.0"
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: NO
+  AdrianExampleUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [AdrianExampleUITests]
+    dependencies:
+      - target: AdrianExample
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.0"
+schemes:
+  AdrianExample:
+    build:
+      targets:
+        AdrianExample: all
+        AdrianExampleUITests: [test]
+    test:
+      targets: [AdrianExampleUITests]
